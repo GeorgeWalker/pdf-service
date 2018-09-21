@@ -22,20 +22,14 @@ namespace PDF.Controllers
     [Route("api/[controller]")]
     public class PDFController : Controller
     {
-        private readonly IConfiguration Configuration;
-        private readonly DbAppContext _context;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IConfiguration Configuration;                
 
         protected ILogger _logger;
 
-        public PDFController(IHttpContextAccessor httpContextAccessor, IConfigurationRoot configuration, DbAppContext context, ILoggerFactory loggerFactory)
+        public PDFController(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
-           
-            _httpContextAccessor = httpContextAccessor;
-            _context = context;
-           
-
+                 
             _logger = loggerFactory.CreateLogger(typeof(PDFController));
         }
         
@@ -50,7 +44,7 @@ namespace PDF.Controllers
             var options = new { format="letter", orientation= "landscape" };            
 
             // execute the Node.js component
-            result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", "schoolbus_permit", rawdata, options); 
+            result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", "cannabis_licence", rawdata, options); 
                         
             return new FileContentResult(result.data, "application/pdf");
         }        

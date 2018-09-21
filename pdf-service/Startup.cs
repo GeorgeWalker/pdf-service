@@ -43,6 +43,10 @@ namespace Pdf
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            // Enable Node Services
+            services.AddNodeServices();
+
             services.AddMvc(config =>
             {
 					
@@ -106,12 +110,12 @@ namespace Pdf
             }
 
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB PDF Service");
             });
         }
 
